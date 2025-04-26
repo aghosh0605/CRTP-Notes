@@ -1,6 +1,6 @@
 # Gnereral
 
-### Tools
+### Required Tools
 
 [PowerView](https://github.com/ZeroDayLab/PowerSploit/blob/master/Recon/PowerView.ps1)
 
@@ -8,43 +8,11 @@
 . C:\AD\Tools\PowerView.ps1
 ```
 
-[AD module](https://github.com/samratashok/ADModule) - MS singed&#x20;
+[AD module](https://github.com/samratashok/ADModule) - MS singed
 
 ```powershell
 Import-Module C:\AD\Tools\ADModule-master\Microsoft.ActiveDirectory.Management.dll
 Import-Module C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1
-```
-
-### BloodHound
-
-BloodHound Versions:
-
-* [BloodHound Legacy](https://github.com/BloodHoundAD/BloodHound)&#x20;
-* [BloodHound ](https://github.com/SpecterOps/BloodHound)
-
-```bash
-# start db server
-sudo neo4j console
-
-# run bloodhound
-bloodhound 
-```
-
-SharpHound collector:
-
-* [SharpHound PowerShell](https://github.com/BloodHoundAD/BloodHound/blob/master/Collectors/SharpHound.ps1)
-* [SharpHound executable](https://github.com/BloodHoundAD/BloodHound/blob/master/Collectors/SharpHound.exe)
-
-```powershell
-# PowerShell
-. SharpHound.ps1
-Invoke-BloodHound -CollectionMethod All 
-Invoke-BloodHound –Steatlh # Remove noisy collections like RDP,DCOM,PSRemote and Local Admin
-Invoke-BloodHound -ExcludeDCs # Avoid MDI
-
-# executable
-SharpHound.exe
-SharpHound.exe –-steatlh # Remove noisy collections like RDP,DCOM,PSRemote and Local Admin
 ```
 
 ### Domain
@@ -108,7 +76,7 @@ Get domain SID for the current domain
 
 {% tabs %}
 {% tab title="PowerView" %}
-Get domain controllers for the current domain
+Get domain controllers for the current domain
 
 ```powershell
 Get-DomainController
@@ -223,14 +191,12 @@ Get a list of computers in the current domain
 Get-ADComputer -Filter * | select Name
 Get-ADComputer -Filter * -Properties *
 Get-ADComputer -Filter 'OperatingSystem -like "*Server 2022*"' -Properties OperatingSystem | select Name,OperatingSystem
-Get-ADComputer -Filter * -Properties DNSHostName | %{TestConnection -Count 1 -ComputerName $_.DNSHostName}
+Get-ADComputer -Filter * -Properties DNSHostName | %{TestConnection -Count 1 -ComputerName $_.DNSHostName}
 ```
 {% endtab %}
 {% endtabs %}
 
 ### Domain Groups
-
-
 
 {% tabs %}
 {% tab title="PowerView" %}
@@ -288,81 +254,7 @@ Get-ADPrincipalGroupMembership -Identity student1
 {% endtab %}
 {% endtabs %}
 
-### Group Policy
-
-{% tabs %}
-{% tab title="PowerView" %}
-Get list of GPO in current domain
-
-```powershell
-Get-DomainGPO
-Get-DomainGPO -ComputerIdentity dcorp-student1
-```
-
-Get GPO(s) which use Restricted Groups
-
-```powershell
-Get-DomainGPOLocalGroup
-```
-
-Get users which are in a local group of a machine using GPO
-
-```powershell
-Get-DomainGPOComputerLocalGroupMapping -ComputerIdentity dcorp-student1
-```
-
-Get machines where the given user is member of a specific group
-
-```powershell
-Get-DomainGPOUserLocalGroupMapping -Identity student1 -Verbose 
-```
-{% endtab %}
-{% endtabs %}
-
-### Organization Units
-
-
-
-{% tabs %}
-{% tab title="PowerView" %}
-Get OUs in a domain
-
-{% code overflow="wrap" %}
-```powershell
-# Get all domain OUs
-Get-DomainOU
-
-# Get all computers inside an OU
-(Get-DomainOU -Identity StudentMachines).distinguishedname | %{Get-DomainComputer -SearchBase $_} | select name
-```
-{% endcode %}
-
-Using `Get-NetOU`
-
-{% code overflow="wrap" %}
-```powershell
-# Get all computers inside an OU
-(Get-NetOU -Identity StudentMachines).distinguishedname | %{Get-DomainComputer -SearchBase $_} | select name
-
-# Get GPO applied on an OU 
-Get-NetOU -Identity "StudentMachines" | select gplink # Get GPO ID
-Get-DomainGPO -Identity "{0D1CC23D-1F20-4EEE-AF64-D99597AE2A6E}" # Get GPO Info
-```
-{% endcode %}
-{% endtab %}
-
-{% tab title="AD Module" %}
-Get OUs in a domain
-
-```powershell
-Get-ADOrganizationalUnit -Filter * -Properties *
-```
-{% endtab %}
-{% endtabs %}
-
 ### Local Groups
-
-
 
 {% tabs %}
 {% tab title="PowerView" %}
@@ -372,7 +264,7 @@ List all the local groups on a machine (requires admin privileges)
 Get-NetLocalGroup -ComputerName dcorp-dc
 ```
 
-Get members of the local group "Administrators" on a machine  (requires admin privileges)
+Get members of the local group "Administrators" on a machine (requires admin privileges)
 
 ```powershell
 Get-NetLocalGroupMember -ComputerName dcorp-dc -GroupName Administrators
@@ -380,11 +272,7 @@ Get-NetLocalGroupMember -ComputerName dcorp-dc -GroupName Administrators
 {% endtab %}
 {% endtabs %}
 
-
-
 ### Shares
-
-
 
 {% tabs %}
 {% tab title="PowerView" %}
@@ -408,63 +296,3 @@ Get-NetFileServer
 ```
 {% endtab %}
 {% endtabs %}
-
-### User Hunting
-
-
-
-{% tabs %}
-{% tab title="PowerView" %}
-Find Local group members of RDP or WinRM of specific machine
-
-```powershell
-Get-NetLocalGroupMember -ComputerName COMPUTER_NAME -GroupName "Remote Desktop Users"
-Get-NetLocalGroupMember -ComputerName COMPUTER_NAME -GroupName "Remote Management Users"
-```
-
-Find all machines on the current domain where the current user has local admin access
-
-```powershell
-# Very noisy
-Find-LocalAdminAccess -Verbose
-
-# Very noisy
-# When SMB and RPC are blocked
-
-# Load
-. C:\AD\Tools\Find-WMILocalAdminAccess.ps1
-# execute
-Find-WMILocalAdminAccess
-
-#Load
-. C:\AD\Tools\Find-PSRemotingLocalAdminAccess.ps1
-# execute
-Find-PSRemotingLocalAdminAccess.ps1
-
-
-```
-
-Find machines  where a domain admin has sessions
-
-```powershell
-# Very noisy
-Find-DomainUserLocation -Verbose
-Find-DomainUserLocation -UserGroupIdentity "RDPUsers"
-Find-DomainUserLocation -CheckAccess 
-Find-DomainUserLocation -Stealth # less noisy, targeting file servers
-
-```
-
-List sessions on remote machines ([source](https://github.com/Leo4j/Invoke-SessionHunter))
-
-```powershell
-# Doesn’t need admin access on remote machines. 
-# Uses Remote Registry and queries HKEY_USERS hive.
-Invoke-SessionHunter -FailSafe
-
-# Opsec friendly
-Invoke-SessionHunter -NoPortScan -Targets C:\AD\Tools\servers.txt
-```
-{% endtab %}
-{% endtabs %}
-

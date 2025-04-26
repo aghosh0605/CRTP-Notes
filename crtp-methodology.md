@@ -4,10 +4,10 @@ description: >-
   during the exam.
 ---
 
-# ⚙ CRTP Methodology
+# ⚙️ CRTP Methodology
 
 {% hint style="info" %}
-### **Important to know:**
+#### **Important to know:**
 
 {% hint style="warning" %}
 CRTP consists on **Live Of The Land** then no phishing, no exploits, and no CVEs.
@@ -26,18 +26,16 @@ The exam goal is to execute OS command on 5 targets not matter what privileges t
 {% endhint %}
 {% endhint %}
 
-
-
-## 0. Defenses&#x20;
+## 0. Defenses
 
 ### Policy language mode
 
 Enumerate PS Language Mode - [#language-mode](basic-enumeration/protection.md#language-mode "mention")
 
-if the Language is constrained:\
-try to bypass using PS v2 or  [#list-applocker-rules](basic-enumeration/protection.md#list-applocker-rules "mention")
+If the Language is constrained:\
+Try to bypass using PS v2 or [#list-applocker-rules](basic-enumeration/protection.md#list-applocker-rules "mention")
 
-### Bypass AMSI&#x20;
+### Bypass AMSI
 
 Bypass AMSI every new PowerShell session -[#amsi-bypass](misc/bypass-defenses.md#amsi-bypass "mention")
 
@@ -51,17 +49,11 @@ Also [#invisi-shell](misc/bypass-defenses.md#invisi-shell "mention") can be used
 
 [#firewall](misc/bypass-defenses.md#firewall "mention")
 
-
-
-
-
 ***
-
-
 
 ## 1. Local Privilege Escalation
 
-check our privileges using `whoami /all`
+Check our privileges using `whoami /all`
 
 Use [#powerup-1](privilege-escalation/local-privilege-escalation.md#powerup-1 "mention") and discover the vectors:
 
@@ -71,11 +63,7 @@ Use [#powerup-1](privilege-escalation/local-privilege-escalation.md#powerup-1 "m
 
 Once we are Local admin use [lsass-dump.md](lateral-movement/lsass-dump.md "mention") to find other users logons
 
-
-
 ***
-
-
 
 ## 2. Domain Enumeration
 
@@ -94,7 +82,7 @@ Better to write down the interesting ACL so they might be useful later
 Start to build up a mind map for attacking paths
 
 * Domain
-* Domain Controller&#x20;
+* Domain Controller
 * Users
 * Computers
 * Domain and Enterprise Administrators
@@ -108,11 +96,7 @@ Understand trusts and map them between the domains
 
 [forests-and-trusts.md](ad-enumeration/forests-and-trusts.md "mention")
 
-
-
 ***
-
-
 
 ## 3. Domain Privileges Escalation
 
@@ -124,7 +108,7 @@ Understand trusts and map them between the domains
 
 ### AD CS
 
-[ad-cs.md](privilege-escalation/cross-domain-privilege-escalation/ad-cs.md "mention")&#x20;
+[ad-cs.md](privilege-escalation/cross-domain-privilege-escalation/ad-cs.md "mention")
 
 ### Delegations
 
@@ -132,20 +116,16 @@ Understand trusts and map them between the domains
 
 ### ACL
 
-[acl.md](persistence/acl.md "mention")&#x20;
+[acl.md](persistence/acl.md "mention")
 
-abusing ACL can lead&#x20;
+abusing ACL can lead
 
-* &#x20;[#resource-based-delegation](privilege-escalation/domain-privilege-escalation/delegations.md#resource-based-delegation "mention")
+* [#resource-based-delegation](privilege-escalation/domain-privilege-escalation/delegations.md#resource-based-delegation "mention")
 * [dc-sync.md](lateral-movement/dc-sync.md "mention")
 * [security-descriptors.md](persistence/security-descriptors.md "mention")
 * Reset user password
 
-
-
 ***
-
-
 
 ## 4. Lateral Movement
 
@@ -161,23 +141,14 @@ abusing ACL can lead&#x20;
 
 [#user-hunting](ad-enumeration/gnereral.md#user-hunting "mention") - Hunt for local admin access
 
-
-
 ***
-
-
 
 ## 5. Cross Domain Privilege Escalation
 
 ### MSSQL
 
-[mssql-servers.md](privilege-escalation/cross-domain-privilege-escalation/mssql-servers.md "mention")&#x20;
+[mssql-servers.md](privilege-escalation/cross-domain-privilege-escalation/mssql-servers.md "mention")
 
 ### Inter-Realm TGT
 
-[trusts.md](privilege-escalation/cross-domain-privilege-escalation/trusts.md "mention") - After abusing Trust keys or krbtgt of trusted domain it is possible to abuse other forest abusing Inter-Realm TGT&#x20;
-
-
-
-
-
+[trusts.md](privilege-escalation/cross-domain-privilege-escalation/trusts.md "mention") - After abusing Trust keys or krbtgt of trusted domain it is possible to abuse other forest abusing Inter-Realm TGT

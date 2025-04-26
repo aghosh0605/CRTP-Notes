@@ -22,7 +22,7 @@ $ExecutionContext.SessionState.LanguageMode
 Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 ```
 
-Test AppLocker Policy
+### Test AppLocker Policy
 
 {% code fullWidth="false" %}
 ```powershell

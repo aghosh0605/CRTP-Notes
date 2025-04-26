@@ -18,8 +18,11 @@
 ## ⛏️ AD Enumeration
 
 * [Gnereral](ad-enumeration/gnereral.md)
+* [BloodHound & SOAPHound](ad-enumeration/bloodhound-and-soaphound.md)
 * [ACL](ad-enumeration/acl.md)
+* [GPO & OU](ad-enumeration/gpo-and-ou.md)
 * [Forests and Trusts](ad-enumeration/forests-and-trusts.md)
+* [User Hunting](ad-enumeration/user-hunting.md)
 
 ## 🔪 Privilege Escalation
 
@@ -60,6 +63,6 @@
 
 ## 📚 Resources
 
-* [AD attacking overall](https://zer1t0.gitlab.io/posts/attacking\_ad/)
+* [AD attacking overall](https://zer1t0.gitlab.io/posts/attacking_ad/)
 * [Rubeus Guide](https://www.hackingarticles.in/a-detailed-guide-on-rubeus/)
 * [The Hacker Recipes](https://www.thehacker.recipes/)
