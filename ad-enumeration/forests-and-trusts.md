@@ -9,20 +9,18 @@ Trust is automatically built or manually established.
 ### One Way
 
 Trust relationships enable access to resources can be either one-way or two-way.\
-A one-way trust is a **unidirectional** path between two domains.&#x20;
+A one-way trust is a **unidirectional** path between two domains.
 
-For example In a one-way trust: \
-_Domain A_  <- _Domain B_
+For example In a one-way trust:\
+&#xNAN;_&#x44;omain A_ <- _Domain B_
 
-_U_sers in _**Domain A**_ can access resources in _**Domain B**_. However, users in _Domain B_ can't access resources in _Domain A_.
+\_U\_sers in _**Domain A**_ can access resources in _**Domain B**_. However, users in _Domain B_ can't access resources in _Domain A_.
 
 ### Two Way
 
 In a two-way trust, _Domain A_ trusts _Domain B_ and _Domain B_ trusts _Domain A_.
 
-_U_sers in _**Domain A**_ can access resources in _**Domain B**_ and, users in _Domain B_ can access resources in _Domain A_.
-
-
+\_U\_sers in _**Domain A**_ can access resources in _**Domain B**_ and, users in _Domain B_ can access resources in _Domain A_.
 
 ## Transitive and non-transitive trusts <a href="#transitive-and-non-transitive-trusts" id="transitive-and-non-transitive-trusts"></a>
 
@@ -41,7 +39,7 @@ Tree-Root will always be two way transitive.
 
 ## External Trusts
 
-Trust between two domains in different forests when forests do not have a trust relationship. \
+Trust between two domains in different forests when forests do not have a trust relationship.\
 Can be one-way or two-way but can't be transitive.
 
 <img src="../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
@@ -79,7 +77,7 @@ Get details about the current forest
 {% code overflow="wrap" %}
 ```powershell
 Get-Forest
-Get-Forest -Forest eurocorp.local
+Get-Forest -Forest eurocorp.local
 ```
 {% endcode %}
 
@@ -89,7 +87,6 @@ Get all domains in the current forest
 ```powershell
 Get-ForestDomain
 Get-ForestDomain -Forest eurocorp.local
-
 ```
 {% endcode %}
 
@@ -100,7 +97,7 @@ Get-ForestGlobalCatalog
 Get-ForestGlobalCatalog -Forest eurocorp.local
 ```
 
-Map trusts of a forest&#x20;
+Map trusts of a forest
 
 ```powershell
 # External trusts in current forest
@@ -124,7 +121,7 @@ Get details about the current forest
 {% code overflow="wrap" %}
 ```powershell
 Get-ADForest
-Get-ADForest -Identity eurocorp.local
+Get-ADForest -Identity eurocorp.local
 ```
 {% endcode %}
 
@@ -150,6 +147,6 @@ Get-ADTrust -Filter 'msDS-TrustForestTrustInfo -ne "$null"'
 {% endtab %}
 {% endtabs %}
 
-## References&#x20;
+## References
 
 * [https://learn.microsoft.com/en-us/entra/identity/domain-services/concepts-forest-trust](https://learn.microsoft.com/en-us/entra/identity/domain-services/concepts-forest-trust)

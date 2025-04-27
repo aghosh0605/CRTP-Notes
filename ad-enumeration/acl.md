@@ -5,9 +5,8 @@ Each **ACE** specifies the access rights of a user or group.
 
 The **security descriptor** for an object can contain two types of ACLs:
 
-* **DACL** - Defines the permission of  a user or group have on object
-* **SACL** - Logs success and failure messages when an object is accessed.\
-
+* **DACL** - Defines the permission of a user or group have on object
+* **SACL** - Logs success and failure messages when an object is accessed.\\
 
 Active Directory object permissions:
 
@@ -19,17 +18,17 @@ Active Directory object permissions:
 * **ForceChangePassword** - ability to change user's password
 * **Self (Self-Membership)** - ability to add yourself to a group
 
-
-
 {% tabs %}
 {% tab title="PowerView" %}
 Get the ACLs associated with the specified object
 
-<pre class="language-powershell" data-overflow="wrap"><code class="lang-powershell">Get-DomainObjectAcl -SamAccountName student1 -ResolveGUIDs
-
- Get-DomainObjectAcl -ResolveGUIDs -Identity "target" | ? {$_.SecurityIdentifier -eq (Convert-NameToSid foothold)}
-<strong>
-</strong></code></pre>
+{% code overflow="wrap" %}
+```powershell
+Get-DomainObjectAcl -SamAccountName student1 -ResolveGUIDs
+# Use loop with pipe for more granular filters
+Get-DomainObjectAcl -ResolveGUIDs -SamAccountName "Control831User" | ? {$_.SecurityIdentifier -eq (Convert-NameToSid foothold)}
+```
+{% endcode %}
 
 Get the ACLs associated with the specified group
 
@@ -54,9 +53,8 @@ Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "stu
 
 Get the ACLs associated with the specified path
 
-```powershell
-Get-PathAcl -Path "\\dcorp-dc.dollarcorp.moneycorp.local\sysvol"
-```
+<pre class="language-powershell"><code class="lang-powershell"><strong>Get-PathAcl -Path "\\dcorp-dc.dollarcorp.moneycorp.local\sysvol"
+</strong></code></pre>
 {% endtab %}
 
 {% tab title="AD Module" %}
@@ -69,4 +67,3 @@ Get the ACLs associated with the specified prefix to be used for search
 {% endcode %}
 {% endtab %}
 {% endtabs %}
-

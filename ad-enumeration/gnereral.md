@@ -21,9 +21,10 @@ Import-Module C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1
 {% tab title="PowerView" %}
 Get Current domain
 
-```powershell
-Get-Domain
-```
+<pre class="language-powershell"><code class="lang-powershell">Get-Domain
+<strong># Displays the domain that the current computer is joined to
+</strong>(Get-Domain).Name
+</code></pre>
 
 Get Object of another domain
 
@@ -72,7 +73,7 @@ Get domain SID for the current domain
 {% endtab %}
 {% endtabs %}
 
-### Domain controller
+### Domain Controller
 
 {% tabs %}
 {% tab title="PowerView" %}
@@ -104,7 +105,7 @@ Get-ADDomainController -DomainName moneycorp.local -Discover
 {% endtab %}
 {% endtabs %}
 
-### Domain users
+### Domain Users
 
 {% tabs %}
 {% tab title="PowerView" %}
@@ -120,19 +121,26 @@ Get list of all properties for users in the current domain
 ```powershell
 Get-DomainUser -Identity student1 -Properties * 
 Get-DomainUser -Properties samaccountname,logonCount
+# Another way
+Get-DomainUser | select samaccountname
 ```
 
-Search for a particular string in a user's attributes
+Different filter options in a user's attributes
 
+{% code overflow="wrap" %}
 ```powershell
 Get-DomainUser -LDAPFilter "Description=*built*" | Select name,Description
+# Search with patterns like Control1User, Control2User etc
+Get-DomainUser -LDAPFilter "(name=Control*User)" | select name
+# Pipe results to a loop to filter results
+Get-DomainUser -LDAPFilter "(name=Control*User)" | %{Get-DomainGroup -MemberIdentity $_.name} | select samaccountname
 ```
+{% endcode %}
 
 Get actively logged users on a computer (requires local admin privileges)
 
 ```powershell
 Get-NetLoggedon -ComputerName dcorp-adminsrv
-
 ```
 
 Get locally logged users on a computer (requires remote registry)
@@ -191,7 +199,7 @@ Get a list of computers in the current domain
 Get-ADComputer -Filter * | select Name
 Get-ADComputer -Filter * -Properties *
 Get-ADComputer -Filter 'OperatingSystem -like "*Server 2022*"' -Properties OperatingSystem | select Name,OperatingSystem
-Get-ADComputer -Filter * -Properties DNSHostName | %{TestConnection -Count 1 -ComputerName $_.DNSHostName}
+Get-ADComputer -Filter * -Properties DNSHostName | %{Test-Connection -Count 1 -ComputerName $_.DNSHostName}
 ```
 {% endtab %}
 {% endtabs %}
@@ -207,13 +215,13 @@ Get-DomainGroup | select Name
 Get-DomainGroup -Domain <targetdomain>
 ```
 
-Get all groups containing the word "admin" in group name
+Get all groups containing the word "admin" in group name. _Enterprise Admins_ will not be shown in the results if it's not a forest root domain.
 
 ```powershell
 Get-DomainGroup *admin*
 ```
 
-Get all the members of the Domain Admins group
+Get all the members of the Domain Admins group. SID ends with 500-1000 is reserved for the domain. Any created objects will be having SID ends after 1000.
 
 ```powershell
 Get-DomainGroupMember -Identity "Domain Admins" -Recurse
@@ -264,7 +272,7 @@ List all the local groups on a machine (requires admin privileges)
 Get-NetLocalGroup -ComputerName dcorp-dc
 ```
 
-Get members of the local group "Administrators" on a machine (requires admin privileges)
+Get members of the local group "Administrators" on a machine (requires admin privileges for non-dc machines)
 
 ```powershell
 Get-NetLocalGroupMember -ComputerName dcorp-dc -GroupName Administrators
@@ -280,7 +288,6 @@ Find shares on hosts in current domain.
 
 ```powershell
 Invoke-ShareFinder -Verbose
-
 ```
 
 Find sensitive files on computers in the domain

