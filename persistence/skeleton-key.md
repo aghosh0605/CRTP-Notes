@@ -1,6 +1,6 @@
 # Skeleton Key
 
-Skeleton key is a persistence technique where it is possible to inject malware to the Domain Controller LSASS process so that it allows access as any user with a single password.
+Skeleton key is a persistence technique where it is possible to inject malware to the Domain Controller LSASS process so that it allows access as any user with a single password. It helps to use one password to log in to all the accounts in the domain.
 
 ## Important to know:
 
@@ -34,6 +34,6 @@ mimikatz # misc::skeleton
 mimikatz # !-
 ```
 
-more detailed&#x20;
+more detailed
 
 {% embed url="https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/persistence/skeleton-key-attack" %}

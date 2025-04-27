@@ -22,17 +22,14 @@ Active Directory object permissions:
 {% tab title="PowerView" %}
 Get the ACLs associated with the specified object
 
-{% code overflow="wrap" %}
 ```powershell
 Get-DomainObjectAcl -SamAccountName student1 -ResolveGUIDs
 # Use loop with pipe for more granular filters
 Get-DomainObjectAcl -ResolveGUIDs -SamAccountName "Control831User" | ? {$_.SecurityIdentifier -eq (Convert-NameToSid foothold)}
 ```
-{% endcode %}
 
 Get the ACLs associated with the specified group
 
-{% code overflow="wrap" %}
 ```powershell
 Get-DomainObjectAcl -SearchBase "LDAP://CN=Domain Admins,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local" -ResolveGUIDs -Verbose
 
@@ -41,15 +38,12 @@ Get-DomainObjectAcl -Identity "Domain Admins" -ResolveGUIDs -Verbose
 # Check replication permission
 Get-DomainObjectAcl -SearchBase "DC=dollarcorp,DC=moneycorp,DC=local" -SearchScope Base -ResolveGUIDs | ?{($_.ObjectAceType -match 'replication-get') -or ($_.ActiveDirectoryRights -match 'GenericAll')} | ForEach-Object {$_ | Add-Member NoteProperty 'IdentityName' $(Convert-SidToName $_.SecurityIdentifier);$_} 
 ```
-{% endcode %}
 
 Search for interesting ACEs
 
-{% code overflow="wrap" %}
 ```powershell
 Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "student1"}
 ```
-{% endcode %}
 
 Get the ACLs associated with the specified path
 

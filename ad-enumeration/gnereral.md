@@ -2,7 +2,7 @@
 
 ### Required Tools
 
-[PowerView](https://github.com/ZeroDayLab/PowerSploit/blob/master/Recon/PowerView.ps1)
+[PowerView](https://github.com/ZeroDayLab/PowerSploit/blob/master/Recon/PowerView.ps1) or [SharpView](https://github.com/tevora-threat/SharpView)
 
 ```powershell
 . C:\AD\Tools\PowerView.ps1
@@ -127,7 +127,6 @@ Get-DomainUser | select samaccountname
 
 Different filter options in a user's attributes
 
-{% code overflow="wrap" %}
 ```powershell
 Get-DomainUser -LDAPFilter "Description=*built*" | Select name,Description
 # Search with patterns like Control1User, Control2User etc
@@ -135,7 +134,6 @@ Get-DomainUser -LDAPFilter "(name=Control*User)" | select name
 # Pipe results to a loop to filter results
 Get-DomainUser -LDAPFilter "(name=Control*User)" | %{Get-DomainGroup -MemberIdentity $_.name} | select samaccountname
 ```
-{% endcode %}
 
 Get actively logged users on a computer (requires local admin privileges)
 
@@ -303,3 +301,9 @@ Get-NetFileServer
 ```
 {% endtab %}
 {% endtabs %}
+
+Another useful tool may be **PowerHuntShares** - [https://github.com/NetSPI/PowerHuntShares](https://github.com/NetSPI/PowerHuntShares)
+
+```powershell
+Invoke-HuntSMBShares -NoPing -OutputDirectory <path> -HostList <list of computer names>
+```

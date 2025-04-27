@@ -2,7 +2,7 @@
 
 ## Format
 
-Security Descriptor Definition Language (SDDL) defines the format which is used to describe a security descriptor.&#x20;
+Security Descriptor Definition Language (SDDL) defines the format which is used to describe a security descriptor.
 
 {% tabs %}
 {% tab title="Syntax" %}
@@ -35,8 +35,6 @@ Apply to all namespaces
 </strong><strong>gwmi -class win32_operatingsystem -ComputerName &#x3C;dc_machine>
 </strong></code></pre>
 
-
-
 ### WMI - PowerShell
 
 ACE for built-in administrators for WMI namespaces `A;CI;CCDCLCSWRPWPRCWD;;;SID`
@@ -61,7 +59,7 @@ Set-RemoteWMI -SamAccountName student1 -ComputerName dcorp-dc -Credential Admini
 
 # Remove
 Set-RemoteWMI -SamAccountName student1 -ComputerName dcorp-dc-namespace 'root\cimv2' -Remove -Verbose
-
+
 ```
 
 PS Remoting (not stable after August 2020 patches)
@@ -90,4 +88,3 @@ Get-RemoteLocalAccountHash -ComputerName <remotehost> -Verbose
 # retrieve domain cached credentials
 Get-RemoteCachedCredential -ComputerName <remotehost> -Verbose
 ```
-

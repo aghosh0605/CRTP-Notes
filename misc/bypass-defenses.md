@@ -1,4 +1,4 @@
-# Bypass defenses
+# Bypass Defenses
 
 ## AMSI Bypass
 
@@ -176,3 +176,12 @@ Usage:
 ```powershell
 DefenderCheck.exe PowerUp.ps1 
 ```
+
+### Extra Tools
+
+1. Invoke-Obfuscation - [https://github.com/danielbohannon/Invoke-Obfuscation](https://github.com/danielbohannon/Invoke-Obfuscation)
+2. ByteToLineNumber.ps1 - Available inside _Tools_ Folder
+3. Codecepticon(For Source Code) - [https://github.com/Accenture/Codecepticon](https://github.com/Accenture/Codecepticon)
+4. ConfuserEX - [https://github.com/mkaring/ConfuserEx](https://github.com/mkaring/ConfuserEx)
+5. LOLBAS - [https://github.com/LOLBAS-Project/LOLBAS?tab=readme-ov-file](https://github.com/LOLBAS-Project/LOLBAS?tab=readme-ov-file)
+6. GPOddity - [https://github.com/synacktiv/GPOddity](https://github.com/synacktiv/GPOddity)

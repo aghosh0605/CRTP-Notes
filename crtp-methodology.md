@@ -30,10 +30,10 @@ The exam goal is to execute OS command on 5 targets not matter what privileges t
 
 ### Policy language mode
 
-Enumerate PS Language Mode - [#language-mode](basic-enumeration/protection.md#language-mode "mention")
+Enumerate PS Language Mode - [Broken link](broken-reference "mention")
 
 If the Language is constrained:\
-Try to bypass using PS v2 or [#list-applocker-rules](basic-enumeration/protection.md#list-applocker-rules "mention")
+Try to bypass using PS v2 or [Broken link](broken-reference "mention")
 
 ### Bypass AMSI
 

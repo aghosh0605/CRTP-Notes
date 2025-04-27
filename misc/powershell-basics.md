@@ -1,5 +1,9 @@
 # PowerShell Basics
 
+Interact with PowerShell using the **\[ADSI]**, **.NET Classes System.DirectoryServices.Active Directory**, **Native Executable**, **WMI using PowerShell**, **Active Directory Module**.&#x20;
+
+PowerShell Detections after Windows PowerShell 5.1(after 2016) - **System-wide Transcription** (Logging in Files), **Script Block Logging** (Event ID 4103 & 4104), **Antimalware Scan Interface** (AMSI), **Constrained Language Mode** (CLM) - **Integrated with AppLocker and WDAC** (Windows Defender Application Control)
+
 ### Useful Symbols
 
 ```powershell

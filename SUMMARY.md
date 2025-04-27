@@ -6,14 +6,13 @@
 ## 💡 Misc
 
 * [PowerShell Basics](misc/powershell-basics.md)
-* [Bypass defenses](misc/bypass-defenses.md)
-* [Transfer files](misc/transfer-files.md)
+* [Bypass Defenses](misc/bypass-defenses.md)
+* [Transfer Files](misc/transfer-files.md)
 
 ## 🔨 Basic enumeration
 
 * [General](basic-enumeration/general.md)
 * [Network](basic-enumeration/network.md)
-* [Protection](basic-enumeration/protection.md)
 
 ## ⛏️ AD Enumeration
 
