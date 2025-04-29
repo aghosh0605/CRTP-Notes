@@ -10,6 +10,9 @@ tasklist /svc
 
 ```batch
 set
+ls env:
+$env:computername
+$env:username
 ```
 
 ### Detailed OS Information
@@ -34,3 +37,12 @@ Get-HotFix | ft -AutoSize
 ```
 {% endtab %}
 {% endtabs %}
+
+### Understand Powershell or CMD
+
+Run `asdfgh` or any arbitary string that is not a command.
+
+* In CMD, you'll get something like:\
+  `'asdfgh' is not recognized as an internal or external command...`
+* In PowerShell, you'll get:\
+  `The term 'asdfgh' is not recognized as...`
