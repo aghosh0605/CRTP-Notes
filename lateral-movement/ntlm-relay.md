@@ -1,6 +1,6 @@
 # NTLM Relay
 
-When capturing a [NTLMv1/2](https://aas-n.gitbook.io/cheatsheet/windows-authentication-1/retrieve-windows-hashes) hashes with tools like Responder, attackers have two options:
+When capturing a [NTLMv1/2](https://www.vaadata.com/blog/understanding-ntlm-authentication-and-ntlm-relay-attacks/) hashes with tools like Responder, attackers have two options:
 
 * crack it to retrieve cleartext passwords
 * relay it to gain code execution on a target
