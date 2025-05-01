@@ -32,6 +32,6 @@ dudisamarel@gmail.com
 ### Aniruddha Ghosh
 
 [LinkedIn](https://www.linkedin.com/in/aghosh0605/)\
-[Portfolio](ttps://cybersupport.in/)
+[Portfolio](https://cybersupport.in/)
 {% endstep %}
 {% endstepper %}
