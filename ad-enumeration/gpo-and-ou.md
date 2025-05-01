@@ -11,6 +11,18 @@ Get-DomainGPO
 Get-DomainGPO -ComputerIdentity dcorp-student1
 ```
 
+Get OUs on which the GPO is applied. From OUs get the objects.
+
+```powershell
+# Get OUs on which the GPO is linked
+Get-DomainOU| Where-Object {
+    $_.gplink -like "*{0BF8D01C-1F62-4BDC-958C-57140B67D147}*"
+}
+# Get the objects inside a OU
+Get-DomainComputer -SearchBase "OU=DevOps,DC=dollarcorp,DC=moneycorp,DC=local"
+# Change the Get-DomainComputer with Get-DomainUser and Get-DomainObject
+```
+
 Get GPO(s) which use Restricted Groups
 
 ```powershell
