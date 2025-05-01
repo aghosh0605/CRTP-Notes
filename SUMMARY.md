@@ -42,6 +42,7 @@
 * [DC Sync](lateral-movement/dc-sync.md)
 * [Over Pass The Hash](lateral-movement/over-pass-the-hash.md)
 * [Runas](lateral-movement/runas.md)
+* [NTLM Relay](lateral-movement/ntlm-relay.md)
 
 ## 🔧 Persistence
 
@@ -59,9 +60,4 @@
 ***
 
 * [🛡️ Mitigations](defense-best-practices.md)
-
-## 📚 Resources
-
-* [AD attacking overall](https://zer1t0.gitlab.io/posts/attacking_ad/)
-* [Rubeus Guide](https://www.hackingarticles.in/a-detailed-guide-on-rubeus/)
-* [The Hacker Recipes](https://www.thehacker.recipes/)
+* [📚 References](references.md)

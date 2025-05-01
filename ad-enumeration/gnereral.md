@@ -304,6 +304,7 @@ Get-NetFileServer
 
 Another useful tool may be **PowerHuntShares** - [https://github.com/NetSPI/PowerHuntShares](https://github.com/NetSPI/PowerHuntShares)
 
-```powershell
-Invoke-HuntSMBShares -NoPing -OutputDirectory <path> -HostList <list of computer names>
-```
+<pre class="language-powershell"><code class="lang-powershell">Import-Module PowerHuntShares.psm1
+# If it aborts by showing 0 permission. Try again in new powershell session.
+<strong>Invoke-HuntSMBShares -NoPing -OutputDirectory &#x3C;path> -HostList &#x3C;list of computer names>
+</strong></code></pre>

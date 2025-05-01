@@ -1,9 +1,8 @@
-
-# 🛠 CRTP Notes
+# 🛠️ CRTP Notes
 
 This book is a collection of notes and tips that I have gathered during my studies for the Certified Red Team Professional (CRTP) exam.\
 \
-It is designed to help me **understand** and **remember** the key concepts covered in the exam, and I plan to use it as my main cheat sheet during the test. \
+It is designed to help me **understand** and **remember** the key concepts covered in the exam, and I plan to use it as my main cheat sheet during the test.\
 \
 The book is primarily intended for viewing on Gitbook, but feel free to fork it on GitHub and make any changes or additions you think would be helpful.
 
@@ -16,25 +15,23 @@ Ready to conquer CRTP! 🚀
 
 ## Project links
 
-### GitHub&#x20;
+* [Github](https://github.com/dudisamarel/crtp-notes)
+* [Gitbook](https://dudisamarel.gitbook.io/crtp-notes/)
 
-[https://github.com/dudisamarel/crtp-notes](https://github.com/dudisamarel/crtp-notes)
+## Contact Us
 
-### Gitbook&#x20;
+{% stepper %}
+{% step %}
+### Dudi Samarel
 
-[https://dudisamarel.gitbook.io/crtp-notes/](https://dudisamarel.gitbook.io/crtp-notes/)
+[LinkedIn](https://www.linkedin.com/in/dudi-samarel-1a595a1a9/)\
+dudisamarel@gmail.com
+{% endstep %}
 
-***
+{% step %}
+### Aniruddha Ghosh
 
-## Contact
-
-### LinkedIn &#x20;
-
-[https://www.linkedin.com/in/dudi-samarel-1a595a1a9/](https://www.linkedin.com/in/dudi-samarel-1a595a1a9/)
-
-### Email&#x20;
-
-#### dudisamarel@gmail.com
-
-
-
+[LinkedIn](https://www.linkedin.com/in/aghosh0605/)\
+[Portfolio](ttps://cybersupport.in/)
+{% endstep %}
+{% endstepper %}
