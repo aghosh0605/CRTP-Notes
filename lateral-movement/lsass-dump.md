@@ -8,6 +8,12 @@ High chances of detection. Always use the Loader.exe to use these. Otherwise, it
 
 Use [impacket ](https://github.com/fortra/impacket)if you are using a Linux machine as an attacker machine. Instead of Mimikatz a obfuscated version called **Invoke-Mimi.ps1**(inside _Tools_ folder) can be used too.
 
+Some of the credentials can be extracted without touching **LSASS**:
+
+* SAM Hive (Registry) - Local Admins (Try to avoid)
+* LSA Secrets/Security Hive (Registry) - Service Account Passwords, Domain Cached Credentials (Maybe Detected)
+* DPAPI Protected Credentials (Disk) - Credentials Manager/Vault, Browser Cookies, Certificates, Azure Tokens (Best for secops)
+
 ### Kerberos encryption keys
 
 The Kerberos SSP used by LSASS in order to provide different authentication methods.\

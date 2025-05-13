@@ -34,7 +34,7 @@ Find-PSRemotingLocalAdminAccess.ps1
 Find machines where a domain admin has sessions
 
 ```powershell
-# Very noisy
+# Very noisy and need admin privileges
 Find-DomainUserLocation -Verbose
 Find-DomainUserLocation -UserGroupIdentity "RDPUsers"
 Find-DomainUserLocation -CheckAccess 
@@ -48,7 +48,7 @@ List sessions on remote machines ([source](https://github.com/Leo4j/Invoke-Sessi
 # Uses Remote Registry and queries HKEY_USERS hive.
 Invoke-SessionHunter -FailSafe
 
-# Opsec friendly
+# Opsec friendly and don't need admin privileges
 Invoke-SessionHunter -NoPortScan -Targets C:\AD\Tools\servers.txt
 ```
 {% endtab %}

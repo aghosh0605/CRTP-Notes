@@ -62,3 +62,9 @@ Import-Module C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1
 Get-Command -Module <module_name>
 Get-Help <module_name>
 ```
+
+### Powershell State of Settings
+
+```powershell
+Get-PSReadLineOption
+```

