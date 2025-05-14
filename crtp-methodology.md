@@ -30,10 +30,10 @@ The exam goal is to execute OS command on 5 targets not matter what privileges t
 
 ### Policy language mode
 
-Enumerate PS Language Mode - [Broken link](broken-reference "mention")
+Enumerate PS Language Mode - [powershell-basics.md](misc/powershell-basics.md "mention")
 
 If the Language is constrained:\
-Try to bypass using PS v2 or [Broken link](broken-reference "mention")
+Try to bypass using PS v2 or [bypass-defenses.md](misc/bypass-defenses.md "mention")
 
 ### Bypass AMSI
 

