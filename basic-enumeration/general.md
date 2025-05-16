@@ -4,6 +4,8 @@
 
 ```batch
 tasklist /svc
+:: Search for specific string
+tasklist /V | findstr svcadmin
 ```
 
 ### ENV variables
@@ -37,6 +39,17 @@ Get-HotFix | ft -AutoSize
 ```
 {% endtab %}
 {% endtabs %}
+
+### Kllist
+
+```powershell
+# Get all the key list
+klist
+# Delete all the keys
+klist purge
+# Opsec safe klist. Use with loader
+Rubeus.exe klist
+```
 
 ### Understand Powershell or CMD
 

