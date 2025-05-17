@@ -16,7 +16,7 @@
 
 ## ⛏️ AD Enumeration
 
-* [Gnereral](ad-enumeration/gnereral.md)
+* [General](ad-enumeration/gnereral.md)
 * [BloodHound & SOAPHound](ad-enumeration/bloodhound-and-soaphound.md)
 * [ACL](ad-enumeration/acl.md)
 * [GPO & OU](ad-enumeration/gpo-and-ou.md)
