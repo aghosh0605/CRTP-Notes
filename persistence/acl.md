@@ -1,4 +1,4 @@
-# ACL
+# ACL-Domain Object
 
 ## DC Sync
 
@@ -17,3 +17,8 @@ Check if worked:
 Get-DomainObjectAcl -SearchBase "DC=dollarcorp,DC=moneycorp,DC=local" -SearchScope Base -ResolveGUIDs | ?{($_.ObjectAceType -match 'replication-get') -or ($_.ActiveDirectoryRights -match 'GenericAll')} | ForEach-Object {$_ | Add-Member NoteProperty 'IdentityName' $(Convert-SidToName $_.SecurityIdentifier);$_} | ?{$_.IdentityName -match "studentx"} 
 ```
 {% endcode %}
+
+### Permissions
+
+* Replicating Directory Changes
+* Replicating Directory Changes All

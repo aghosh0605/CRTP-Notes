@@ -54,8 +54,8 @@
 * [DSRM](persistence/dsrm.md)
 * [Custom SSP](persistence/custom-ssp.md)
 * [AdminSDHolder](persistence/adminsdholder.md)
+* [ACL-Domain Object](persistence/acl.md)
 * [Security Descriptors](persistence/security-descriptors.md)
-* [ACL](persistence/acl.md)
 
 ***
 

