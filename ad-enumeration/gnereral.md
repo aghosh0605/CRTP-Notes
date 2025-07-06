@@ -1,4 +1,4 @@
-# Gnereral
+# General
 
 ### Required Tools
 
@@ -116,7 +116,7 @@ Get-DomainUser
 Get-DomainUser -Identity student1
 ```
 
-Get list of all properties for users in the current domain
+Get a list of all properties for users in the current domain
 
 ```powershell
 Get-DomainUser -Identity student1 -Properties * 
@@ -131,6 +131,8 @@ Different filter options in a user's attributes
 Get-DomainUser -LDAPFilter "Description=*built*" | Select name,Description
 # Search with patterns like Control1User, Control2User etc
 Get-DomainUser -LDAPFilter "(name=Control*User)" | select name
+# Check group in which user is added
+Get-DomainUser  -Identity "studentx" | Select-Object -ExpandProperty memberof
 # Pipe results to a loop to filter results
 Get-DomainUser -LDAPFilter "(name=Control*User)" | %{Get-DomainGroup -MemberIdentity $_.name} | select samaccountname
 ```
@@ -217,12 +219,14 @@ Get all groups containing the word "admin" in group name. _Enterprise Admins_ wi
 
 ```powershell
 Get-DomainGroup *admin*
+# To get enterprise admins use -Domain <forest_root_domain>
 ```
 
 Get all the members of the Domain Admins group. SID ends with 500-1000 is reserved for the domain. Any created objects will be having SID ends after 1000.
 
 ```powershell
 Get-DomainGroupMember -Identity "Domain Admins" -Recurse
+Get-DomainGroupMember -Identity "Enterprise Admins" -Domain moneycorp.local
 ```
 
 Get the group membership for a user
