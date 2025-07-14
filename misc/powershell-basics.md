@@ -44,6 +44,15 @@ powershell -c <cmd>
 powershell -encodedcommand $env:PSExecutionPolicyPreference="bypass" 
 ```
 
+### Get username & Computername
+
+```powershell
+$env:COMPUTERNAME
+# set computername in winrs
+$env:username
+# set username in winrs
+```
+
 ### Load PowerShell script
 
 ```powershell

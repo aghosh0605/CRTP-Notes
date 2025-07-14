@@ -113,6 +113,8 @@ Get a list of users in the current domain
 
 ```powershell
 Get-DomainUser
+# Limit the result to first 2
+Get-DomainUser| Select-Object -First 2
 Get-DomainUser -Identity student1
 ```
 

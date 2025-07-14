@@ -4,7 +4,7 @@
 
 {% tabs %}
 {% tab title="PowerView" %}
-Find Local group members of RDP or WinRM of specific machine
+Find Local group members of RDP or WinRM of the specific machine
 
 ```powershell
 Get-NetLocalGroupMember -ComputerName COMPUTER_NAME -GroupName "Remote Desktop Users"
@@ -28,13 +28,13 @@ Find-WMILocalAdminAccess
 #Load(Uses WinRM)
 . C:\AD\Tools\Find-PSRemotingLocalAdminAccess.ps1
 # execute
-Find-PSRemotingLocalAdminAccess.ps1
+Find-PSRemotingLocalAdminAccess -Verbose
 ```
 
 Find machines where a domain admin has sessions
 
 ```powershell
-# Very noisy and need admin privileges
+# Very noisy and needs admin privileges
 Find-DomainUserLocation -Verbose
 Find-DomainUserLocation -UserGroupIdentity "RDPUsers"
 Find-DomainUserLocation -CheckAccess 
