@@ -34,6 +34,7 @@
   * [Trusts](privilege-escalation/cross-domain-privilege-escalation/trusts.md)
   * [AD CS](privilege-escalation/cross-domain-privilege-escalation/ad-cs.md)
   * [MSSQL Servers](privilege-escalation/cross-domain-privilege-escalation/mssql-servers.md)
+  * [LSASS Dump](privilege-escalation/cross-domain-privilege-escalation/lsass-dump.md)
 
 ## 🏎️ Lateral Movement
 

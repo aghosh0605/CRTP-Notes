@@ -47,10 +47,12 @@ powershell -encodedcommand $env:PSExecutionPolicyPreference="bypass"
 ### Get username & Computername
 
 ```powershell
-$env:COMPUTERNAME
+# Get all environment variables
+ls env:
 # set computername in winrs
-$env:username
+$env:COMPUTERNAME
 # set username in winrs
+$env:username
 ```
 
 ### Load PowerShell script

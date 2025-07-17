@@ -23,3 +23,10 @@ ipconfig /all
 ```batch
 route print
 ```
+
+### Network Shares
+
+```batch
+:: View the shares
+net view \\eurocorp-dc.eurocorp.local\
+```
